@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartStudy Hub Offer Letter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #e9f5ff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .letter-container {
+      background: white;
+      padding: 40px;
+      margin: 40px auto;
+      border-radius: 10px;
+      max-width: 850px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    .text-signature {
+      margin-top: 40px;
+      font-weight: bold;
+      font-style: italic;
+      color: #1d4ed8;
+    }
+    .btn-primary {
+      background-color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+    .btn-outline-primary {
+      border-color: #1d4ed8;
+      color: #1d4ed8;
+    }
+    .btn-outline-primary:hover {
+      background-color: #1d4ed8;
+      color: white;
+    }
+    @media print {
+    body * {
+      visibility: hidden;
+    }
+    .letter-container, .letter-container * {
+      visibility: visible;
+    }
+    .letter-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+  <h3 class="text-center text-primary mb-4">SmartStudy Hub - Internship Offer Generator</h3>
+  <form onsubmit="generateLetter(event)">
+    <div class="form-group">
+      <label>Student Full Name</label>
+      <input type="text" class="form-control" id="inputName" required>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" class="form-control" id="inputEmail" required>
+    </div>
+    <div class="form-group">
+      <label>Internship Role</label>
+      <input type="text" class="form-control" id="inputRole" required>
+    </div>
+    <div class="form-group">
+      <label>Start Date</label>
+      <input type="date" class="form-control" id="inputStart" required>
+    </div>
+    <div class="form-group">
+      <label>End Date</label>
+      <input type="date" class="form-control" id="inputEnd" required>
+    </div>
+    <button class="btn btn-primary mt-3">Generate Offer Letter</button>
+  </form>
+</div>
+
+<div class="container letter-container text-dark" id="offerLetter">
+  <div class="text-center">
+    <img src="logo1.png" alt="SmartStudy Hub Logo" class="logo">
+    <h3 class="text-primary font-weight-bold">SmartStudy Hub</h3>
+    <h5 class="text-muted">Internship Offer Letter</h5>
+    <hr>
+  </div>
+
+  <p><strong>Date:</strong> <span id="date">[DATE]</span></p>
+  <p><strong>To,</strong><br>
+    <span id="studentName">[STUDENT NAME]</span><br>
+    <span id="studentEmail">[EMAIL]</span>
+  </p>
+
+  <p>
+    Dear <span id="studentName2">[STUDENT NAME]</span>,
+  </p>
+
+  <p>
+    We are delighted to extend this offer for an internship position as a <strong><span id="internshipRole">[ROLE]</span></strong> at <strong>SmartStudy Hub</strong>. This internship will begin on <span id="startDate">[START DATE]</span> and will conclude on <span id="endDate">[END DATE]</span>.
+  </p>
+
+  <p>
+    During this internship, you will be expected to contribute proactively to assigned projects, collaborate with team members, and uphold the standards of professionalism and dedication. This experience is designed to give you hands-on exposure and help bridge the gap between academic knowledge and practical industry application.
+  </p>
+
+  <p>
+    Please confirm your acceptance by responding to this letter via email. We look forward to welcoming you onboard and watching you grow professionally.
+  </p>
+
+  <p>
+    Wishing you a fruitful and enriching internship journey with us.
+  </p>
+
+  <p class="text-signature">
+    — SmartStudy Hub Team
+  </p>
+</div>
+
+<div class="text-center mb-5">
+  <button onclick="window.print()" class="btn btn-outline-primary mt-3">Download as PDF</button>
+</div>
+
+<script>
+  function formatDate(dateStr) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateStr).toLocaleDateString('en-IN', options);
+  }
+
+  function generateLetter(e) {
+    e.preventDefault();
+    const name = document.getElementById('inputName').value;
+    const email = document.getElementById('inputEmail').value;
+    const role = document.getElementById('inputRole').value;
+    const start = document.getElementById('inputStart').value;
+    const end = document.getElementById('inputEnd').value;
+
+    document.getElementById('studentName').textContent = name;
+    document.getElementById('studentEmail').textContent = email;
+    document.getElementById('studentName2').textContent = name;
+    document.getElementById('internshipRole').textContent = role;
+    document.getElementById('startDate').textContent = formatDate(start);
+    document.getElementById('endDate').textContent = formatDate(end);
+    document.getElementById('date').textContent = formatDate(new Date());
+
+    document.getElementById('offerLetter').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('offerLetter').offsetTop, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
